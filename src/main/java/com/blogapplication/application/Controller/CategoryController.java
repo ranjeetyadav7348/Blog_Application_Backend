@@ -22,7 +22,7 @@ import com.blogapplication.application.payloads.apiResponse;
 import jakarta.validation.Valid;
 
 @RestController
-@RequestMapping("/api/categories")
+@RequestMapping("/api/v1/categories")
 public class CategoryController {
 
     @Autowired
@@ -37,17 +37,17 @@ public class CategoryController {
     }
 
 
-    @PostMapping("/{categoryId}")
-    public ResponseEntity<CategoryDto> updateCategory(@Valid @RequestBody CategoryDto categoryDto,@PathVariable Integer categoryId)
+    @PostMapping("/{catId}")
+    public ResponseEntity<CategoryDto> updateCategory(@Valid @RequestBody CategoryDto categoryDto,@PathVariable Integer catId)
     {
-        CategoryDto updatedCat=categoryService.updateCategory(categoryDto, categoryId);
+        CategoryDto updatedCat=categoryService.updateCategory(categoryDto, catId);
         return ResponseEntity.status(HttpStatus.ACCEPTED).body(updatedCat);
     }
 
-    @DeleteMapping("/{categoryId}")
-    public ResponseEntity<apiResponse> deleteCategory(@PathVariable Integer categoryId)
+    @DeleteMapping("/{catId}")
+    public ResponseEntity<apiResponse> deleteCategory(@PathVariable Integer catId)
     {
-       categoryService.deleteCategory(categoryId);
+       categoryService.deleteCategory(catId);
         return new ResponseEntity(new apiResponse("Category Deleted Successfully",true),HttpStatus.OK);
     }
 

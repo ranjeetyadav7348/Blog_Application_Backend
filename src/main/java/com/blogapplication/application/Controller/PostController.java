@@ -32,7 +32,7 @@ import com.blogapplication.application.payloads.apiResponse;
 import jakarta.servlet.http.HttpServletResponse;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/v1")
 public class PostController {
 
     @Autowired

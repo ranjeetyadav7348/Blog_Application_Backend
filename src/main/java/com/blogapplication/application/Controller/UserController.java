@@ -23,7 +23,7 @@ import com.blogapplication.application.payloads.apiResponse;
 import jakarta.validation.Valid;
 
 @RestController
-@RequestMapping("/api/users")
+@RequestMapping("/api/v1/users")
 @EnableMethodSecurity
 public class UserController {
 

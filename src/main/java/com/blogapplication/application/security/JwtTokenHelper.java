@@ -26,18 +26,6 @@ public class JwtTokenHelper {
     
     private final String secret = "iojfoojiooaij4u89843ujinfowijwdonfncijiew98eijonondsononffh9oirhfwe9ohfhwoeoowio9e123456789012345678901234";
 
-      // Generate a secure random secret key
-    // private String generateSecretKey(int keyLengthBytes) {
-    //     SecureRandom secureRandom = new SecureRandom();
-    //     byte[] keyBytes = new byte[keyLengthBytes];
-    //     secureRandom.nextBytes(keyBytes);
-    //     return Base64.getEncoder().encodeToString(keyBytes);
-    // }
-
-
-   
-
-
     //get username from token
     public String getUsernameFromToken(String token)
     {

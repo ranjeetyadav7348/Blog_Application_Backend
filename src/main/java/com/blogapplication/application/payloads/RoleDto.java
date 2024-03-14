@@ -3,9 +3,9 @@ package com.blogapplication.application.payloads;
 import lombok.Data;
 
 @Data
-public class JwtAuthResponse {
+public class RoleDto {
 
-    private String token;
-    private UserDto user;
+    private int id;
+    private String name;
     
 }
