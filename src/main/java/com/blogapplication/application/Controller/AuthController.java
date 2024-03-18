@@ -208,7 +208,7 @@ public class AuthController {
 
 
 
-    @PostMapping("register")
+    @PostMapping("/register")
     public ResponseEntity<UserDto> registerUser(@RequestBody UserDto userDto)
     {
         UserDto registeredUser=userService.registerNewUser(userDto);
