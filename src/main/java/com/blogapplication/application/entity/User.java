@@ -1,5 +1,6 @@
 package com.blogapplication.application.entity;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
@@ -34,13 +35,14 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-public class User implements UserDetails {
+public class User implements UserDetails ,Serializable{
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(nullable = false, length = 100)
     private int id;
     private String name;
+    @Column(unique = true, nullable = false)
     private String email;
     private String password;
     private String about;
@@ -48,17 +50,19 @@ public class User implements UserDetails {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Post> posts = new ArrayList<>();
 
-    @ManyToMany(cascade =  CascadeType.ALL , fetch = FetchType.EAGER)
-    @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "role", referencedColumnName = "id")
-
-    )
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinTable(name = "user_role", 
+    joinColumns = @JoinColumn(name = "user", referencedColumnName = "id"), 
+    inverseJoinColumns = @JoinColumn(name = "role", referencedColumnName = "id")
+      )
     private Set<Role> roles = new HashSet<>();
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         // TODO Auto-generated method stub
 
-     List< SimpleGrantedAuthority> authorities = roles.stream().map((role)-> new SimpleGrantedAuthority(role.getName())).collect(Collectors.toList());
+        List<SimpleGrantedAuthority> authorities = roles.stream()
+                .map((role) -> new SimpleGrantedAuthority(role.getName())).collect(Collectors.toList());
         return authorities;
     }
 

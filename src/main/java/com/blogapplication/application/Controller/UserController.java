@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.blogapplication.application.Service.UserService;
 import com.blogapplication.application.payloads.UserDto;
 import com.blogapplication.application.payloads.apiResponse;
+import com.blogapplication.application.payloads.JwtAuthRequest;
 
 import jakarta.validation.Valid;
 
@@ -70,6 +72,20 @@ public class UserController {
     public ResponseEntity<List<UserDto>> getUsers()
     {
         return ResponseEntity.ok(userService.getAllUser());
+    }
+
+    @PostMapping("/updatePassword")
+    public ResponseEntity<?> updatePassword(@RequestBody JwtAuthRequest jwtAuthRequest )
+    {
+
+
+       
+       userService.updatePassword(jwtAuthRequest);
+        
+       return new ResponseEntity(new apiResponse("update successfully",true),HttpStatus.ACCEPTED);
+
+
+
     }
 
 

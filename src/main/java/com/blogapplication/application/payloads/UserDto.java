@@ -31,5 +31,15 @@ public class UserDto {
     private String about;
 
     private Set< RoleDto > roles = new HashSet<>();
+
+    public UserDto(@NotEmpty @Size(min = 4, message = "Username must be min is 4 characters!!") String name,
+            @Email(message = "Email is not valid") String email,
+            @NotEmpty @Size(min = 3, max = 10, message = "Password must be in between 4 to 10 character") String password,
+            @NotEmpty String about) {
+        this.name = name;
+        this.email = email;
+        this.password = password;
+        this.about = about;
+    }
     
 }

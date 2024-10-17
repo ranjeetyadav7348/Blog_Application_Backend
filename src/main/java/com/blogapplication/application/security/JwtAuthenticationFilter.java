@@ -63,6 +63,8 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             // Load UserDetails based on the username extracted from the token
             UserDetails userDetails = userDetailsService.loadUserByUsername(username);
 
+            
+
             // Validate the token
             if (jwtTokenHelper.validateToken(token, userDetails)) {
                 // Create authentication token based on UserDetails

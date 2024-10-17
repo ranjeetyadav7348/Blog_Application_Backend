@@ -15,6 +15,7 @@ import com.blogapplication.application.Repository.UserRepository;
 import com.blogapplication.application.Service.UserService;
 import com.blogapplication.application.entity.Role;
 import com.blogapplication.application.entity.User;
+import com.blogapplication.application.payloads.JwtAuthRequest;
 import com.blogapplication.application.payloads.UserDto;
 
 
@@ -38,7 +39,6 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserDto createUser(UserDto userDto) {
-        // TODO Auto-generated method stub
 
         User user=this.dtoToUser(userDto);
 
@@ -134,6 +134,41 @@ public class UserServiceImpl implements UserService {
         User newUser=userRepo.save(user);
 
         return modelMapper.map(newUser,UserDto.class);
+    }
+
+    @Override
+    public void updatePassword(JwtAuthRequest jwtAuthRequest) {
+        
+
+        String email= jwtAuthRequest.getUsername();
+        String password= jwtAuthRequest.getPassword();
+
+
+        if (email.startsWith("\"") && email.endsWith("\"")) {
+            email = email.substring(1, email.length() - 1);
+        }
+
+
+        System.out.println(password+" and the value of email: "+email);
+
+
+
+       
+
+        User user = userRepo.findByEmail(email)
+        .orElseThrow(() -> new RuntimeException("User not found with email: " ));
+         System.out.println("thhe value of user is"+user);
+
+
+        user.setPassword(passwordEncoder.encode(password));
+
+
+
+        userRepo.save(user);
+        
+
+
+
     }
 
 
